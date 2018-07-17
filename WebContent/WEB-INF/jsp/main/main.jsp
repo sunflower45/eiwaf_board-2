@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="/js/sha1.min.js"></script>
+
 <script type="text/javascript" src="/js/jquery/jquery-1.7.2.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/eiwaf/eiwaf-1.0.0.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/util.comn.js" charset="utf-8"></script>
@@ -26,6 +28,8 @@ $(document).ready(function(){
 			return false;
 		}
 		else {
+			document.getElementById("memberPw").value = b64_sha1($("#memberPw").val());
+
 			document.form1.action="${path}/member/loginCheck.do";
 			document.form1.submit();
 		}

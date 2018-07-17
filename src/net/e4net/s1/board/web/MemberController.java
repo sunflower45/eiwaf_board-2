@@ -94,7 +94,6 @@ public class MemberController extends PublicController {
 	
 	@RequestMapping("pwUpdate.do")
 	public ModelAndView pwUpdate(HttpServletRequest request) throws Exception{
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/updatePw");
 
@@ -228,7 +227,19 @@ public class MemberController extends PublicController {
 		}
 	}
 
-	
+	@RequestMapping(value="updatePwMember.do")
+	public ModelAndView updatePwMember(@ModelAttribute MemberVO vo, HttpServletRequest request) throws Exception {
+		memberService.pwUpdate(vo);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		Status status = WebUtil.getAttributeStatus(request);
+
+		if (status.isOk()) {
+			return getOkModelAndView(mav, status);
+		} else {
+			return getFailModelAndView(mav, status);
+		}
+	}
 	@RequestMapping("logout.do")
 	public ModelAndView logout(HttpSession session, HttpServletRequest request) throws Exception{
 		memberService.logout(session);

@@ -64,7 +64,11 @@
 		WHERE
 			member_id = #{memberId}
 	</update>
-	
+	<update id="updatePw">
+		UPDATE tbl_member
+		SET member_pw = #{memberPw}
+		WHERE member_id = #{memberId}
+	</update>
 	<delete id="deleteMember">
 		DELETE FROM tbl_member
 		WHERE member_id = #{memberId}

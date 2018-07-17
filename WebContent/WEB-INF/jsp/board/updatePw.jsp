@@ -15,8 +15,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script>
-var pw_validate = true;
-var id_validate = true;
+var pw_validate = false;
+var id_validate = false;
 $(document).ready(function () {
 	//[1] lblError 레이어 클리어
     $('#memberPw').keyup(function () {
@@ -58,7 +58,7 @@ function chkIdCallback(status, data){
 	
 	if(data.cnt =="1"){
 			id_validate = true;
-			alert("사용 가능한 아이디입니다.");
+			alert("아이디가 인증되었습니다.");
 			$("#memberPw").focus();
 		
 	} else {
@@ -90,7 +90,7 @@ $(document).on('click', '#submitBtn', function(){
 	} else {
 		document.getElementById("memberPw").value = b64_sha1($("#memberPw").val());
 		var f = document.form1;
-		var result = svcf_Ajax("/member/joinUpdate.do", f, {
+		var result = svcf_Ajax("/member/updatePwMember.do", f, {
 			
 			async : false,
 			procType : "R"
@@ -101,28 +101,28 @@ $(document).on('click', '#submitBtn', function(){
 
 function joinUpdateCallback(status, data){
 	console.log(data.memberPw);
-	alert("가입이 완료되었습니다.");
+	alert("새 비밀번호가 변경되었습니다..");
 	location.href="/main.do";
 }
 </script>
 <title>새 비밀번호 발급</title>
 </head>
-<body>
+<body style="background-image:url('/img/background2.JPG');background-size:cover;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)">
 <form id="form1" name="form1" method="post">
 		<table style="width:400px" class="table">
 		<tr>
-			<td >아이디</td>
+			<td><strong style="color:white;">아이디</strong></td>
 			<td><input class="form-control"  type="text" id="memberId" name="memberId"></td>
-			<td><button type='button' id='idCheck'>아이디 재확인</button></td>
+			<td><button type='button' id='idCheck' class="btn btn-default">아이디확인</button></td>
 		</tr>
 		
 		<tr>
-			<td>새로 발급받을 비밀번호 </td>
+			<td><strong style="color:white;">새로 발급받을 비밀번호</strong> </td>
 			<td><input class="form-control"  type="password" id="memberPw" name="memberPw"></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td>비밀번호 확인</td>
+			<td><strong style="color:white;">비밀번호 확인</strong></td>
 			<td><input class="form-control"  type="password" id="memberPwCheck" name="memberPwCheck">
 			<div style="margin-top:10px" id="lblError">
 				
@@ -132,9 +132,9 @@ function joinUpdateCallback(status, data){
 			
 		</tr>
 		<tr>
-			<td><input type="button"  class="btn btn-success" id="findPw" value="비밀번호 인증">
-			
+			<td><input type="button"  class="btn btn-default" id="submitBtn" value="비밀번호 인증">
 			</td>
+			<td></td>
 			<td></td>
 		</tr>
 	</table>

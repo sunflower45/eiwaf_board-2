@@ -154,7 +154,19 @@ public class MemberService extends TestService{
 			if(SqlSession != null) SqlSession.close();
 		}
 	}
-	
+	public void pwUpdate(MemberVO vo) throws Exception {
+		SqlSession = null;
+		try {
+			SqlSession = openSession(true);
+			SqlSession.update("member.updatePw", vo);
+			SqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		} finally {
+			if(SqlSession != null) SqlSession.close();
+		}
+	}
 	public String loginCheck(MemberVO vo, HttpSession session) throws Exception{
 		SqlSession = null;
 		try {
